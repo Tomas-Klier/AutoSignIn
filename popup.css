@@ -1,0 +1,130 @@
+body{
+	background:#e6e6e6;
+	font-size:12px;
+}
+
+#container{
+	margin:20px auto;
+	width:249px;
+}
+
+.header{
+	font-size:15pt;
+	font-weight:bold;
+}
+
+.item{
+	margin-top:10px;
+	padding:5px;
+	width:235px;
+	border:2px solid #000;
+	border-radius:10px;
+	overflow:hidden;
+}
+
+.item .caption{
+	margin:5px 0;
+	font-weight:bold;
+	display:block;
+}
+
+.content{
+	overflow:hidden;
+}
+
+.userpass{
+	float:left;
+}
+
+.userpass div{
+	margin:5px 0;
+}
+
+.userpass label{
+	display:block;
+	width:30px;
+	height:26px;
+	line-height:26px;
+	float:left;
+}
+
+.userpass input:not([type="button"]){
+	width:150px;
+	height:26px;
+	float:left;
+}
+
+.user img{
+	position:fixed;
+	margin:3px 0 0 -22px;
+}
+
+.user img:hover{
+	background:#e6e6e6;
+}
+
+.user ul{
+	position:fixed;
+	margin:26px 0 0 30px;
+	padding-left:0;
+	border:1px solid #000;
+}
+
+.user ul li{
+	width:148px;
+	height:22px;
+	line-height:22px;
+	display:block;
+	background-color:#fff;
+}
+
+.user ul li:hover{
+	background-color:#338fff;
+}
+
+.user,.pass{
+	overflow:hidden;
+}
+
+.ok{
+	float:left;
+	margin-left:5px;
+	margin-top:5px;
+}
+
+.ok input{
+	width:50px;
+	height:57px;
+}
+
+.state{
+	display:none;
+	overflow:hidden;
+}
+
+.state div{
+	width:180px;
+	height:26px;
+	line-height:26px;
+}
+
+.state a{
+	display:block;
+	float:left;
+	width:45px;
+	line-height:20px;
+	position:fixed;
+	margin:-45px 0 0 185px;
+}
+
+.state div label{
+	display:block;
+	float:left;
+}
+
+.state div b{
+	color:#f00;
+	display:block;
+	margin-left:10px;
+	float:left;
+}

@@ -1,3 +1,3 @@
 # AutoSignIn
 
-miaoss auto sign extension for chrome.
+miaoss website auto sign extension for chrome.

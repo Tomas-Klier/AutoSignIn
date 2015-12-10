@@ -1,4 +1,4 @@
-var g_SignUrl = "http://www.miao2015.pw";
+var g_SignUrl = "http://www.miaoss.lol";
 
 function GetAccount(){
 	if((email = localStorage.getItem("email")) && (password = localStorage.getItem("password"))){
@@ -25,52 +25,58 @@ function OpenPopup(msg){
 }
 
 function AutoSign(email, password){
-	get(g_SignUrl+"/panel.php", function(text) {
-		//$("pageload").innerHTML = text;
-		//var signbutton = $("gift500mb");
+	getresponseurl(g_SignUrl, function(url) {
+	
+		g_SignUrl = url;
+		console.log(url);
 		
-		var doc = document.implementation.createHTMLDocument("temp");
-		doc.documentElement.innerHTML = text;
-		var signbutton = doc.getElementById("gift500mb");
-		
-		if(signbutton == null) {
-			post(g_SignUrl+"/login.php", "email="+email+"&pass="+password,
-				function (text) {
-					doc.documentElement.innerHTML = text;
-					var msg = doc.querySelector(".ui.negative.message");
-					
-					if(msg == null){
-						console.log("login successfully.");
-						AutoSign(email, password);
-					}else{
-						alert(trim(msg.innerText));
-						console.log(trim(msg.innerText));
-						localStorage.removeItem("password");
-						OpenPopup();
-					}
-			});
-			return;
-		}
-		
-		console.log(signbutton.innerText);
-		
-		get(g_SignUrl+"/api.php?cmd=gift500mb", function (text) {
-			var curDateTime = new Date();
-			var lastsinged = curDateTime.getFullYear()+"-"+curDateTime.getMonth()+"-"+curDateTime.getDay()
-								+" "+curDateTime.getHours()+":"+curDateTime.getMinutes()+":"+curDateTime.getSeconds();
-			text = trim(text);
-			if(text.search("MB") > 0) {
-				alert(text);
-			}else{
-				//var re = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/;
-				var re = new RegExp("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}");
-				if(text.match(re)){
-					lastsinged = text.match(re)[0];
-				}
+		get(g_SignUrl+"/panel.php", function(text) {
+			//$("pageload").innerHTML = text;
+			//var signbutton = $("gift500mb");
+			
+			var doc = document.implementation.createHTMLDocument("temp");
+			doc.documentElement.innerHTML = text;
+			var signbutton = doc.getElementById("gift500mb");
+			
+			if(signbutton == null) {
+				post(g_SignUrl+"/login.php", "email="+email+"&pass="+password,
+					function (text) {
+						doc.documentElement.innerHTML = text;
+						var msg = doc.querySelector(".ui.negative.message");
+						
+						if(msg == null){
+							console.log("login successfully.");
+							AutoSign(email, password);
+						}else{
+							alert(trim(msg.innerText));
+							console.log(trim(msg.innerText));
+							localStorage.removeItem("password");
+							OpenPopup();
+						}
+				});
+				return;
 			}
-			localStorage.setItem("lastsigned",lastsinged);
-			chrome.runtime.sendMessage({type: "signed"});
-			console.log(text);
+			
+			console.log(signbutton.innerText);
+			
+			get(g_SignUrl+"/api.php?cmd=gift500mb", function (text) {
+				var curDateTime = new Date();
+				var lastsinged = curDateTime.getFullYear()+"-"+curDateTime.getMonth()+"-"+curDateTime.getDay()
+									+" "+curDateTime.getHours()+":"+curDateTime.getMinutes()+":"+curDateTime.getSeconds();
+				text = trim(text);
+				if(text.search("MB") > 0) {
+					alert(text);
+				}else{
+					//var re = /\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}/;
+					var re = new RegExp("\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}");
+					if(text.match(re)){
+						lastsinged = text.match(re)[0];
+					}
+				}
+				localStorage.setItem("lastsigned",lastsinged);
+				chrome.runtime.sendMessage({type: "signed"});
+				console.log(text);
+			});
 		});
 	});
 };
